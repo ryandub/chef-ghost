@@ -1,0 +1,18 @@
+#/etc/init/ghost.conf
+description "Ghost Blog"
+# Start the service after everything loaded
+start on (local-filesystems and net-device-up IFACE=eth0)
+stop on shutdown
+console log
+# Automatically restart service
+respawn
+respawn limit 99 5
+setuid <%= @user %>
+script
+    # Navigate to your app directory
+    cd <%= @dir %>
+
+    # Run the script with Node.js and output to a log
+    export NODE_ENV=production
+    exec /usr/local/bin/npm start <%= @dir %>
+end script

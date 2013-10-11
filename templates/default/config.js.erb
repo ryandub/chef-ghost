@@ -1,0 +1,57 @@
+// # Ghost Configuration
+// Setup your Ghost install for various environments
+
+var path = require('path'),
+    config;
+
+config = {
+    production: {
+        url: 'http://<%= @url %>',
+        <% if @mail_transport == 'mailgun' %>
+        mail: {
+        	transport: 'SMTP',
+		options: {
+			service: 'Mailgun',
+			auth: {
+				user: '<%= @mail_user %>',
+				pass: '<%= @mail_password %>'
+			}
+		}
+        },
+        <% else %>
+        mail: {
+          transport: 'SMTP',
+          options: {
+            host: '127.0.0.1',
+            <% if @mail_password %>
+            auth: {
+              user: '<%= @mail_user %>',
+              pass: '<%= @mail_password %>'
+            },
+            <% end %>
+            service: 'mySMTPService'
+          }
+        },
+        <% end %>
+        database: {
+            client: 'mysql',
+            connection: {
+            	host: '<%= @db_host %>',
+		user: '<%= @db_user %>',
+		password: '<%= @db_password %>',
+		database: '<%= @db_name %>',
+		charset: 'utf8'
+            },
+            debug: false
+        },
+        server: {
+            // Host to be passed to node's `net.Server#listen()`
+            host: '127.0.0.1',
+            // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
+            port: '2368'
+        }
+    }
+};
+
+// Export config
+module.exports = config;
