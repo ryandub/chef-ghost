@@ -1,7 +1,7 @@
 include_recipe 'nginx'
 
 begin
-  databag = Chef::EncryptedDataBagItem.load(node[:ghost][:databag_name], node[:ghost][:databag_item])
+  databag = Chef::EncryptedDataBagItem.load(node[:ghost][:databag], node[:ghost][:databag_item])
   node.set[:ghost][:ssl_cert] = databag['ghost']['ssl_cert'] rescue node[:ghost][:ssl_cert]
   node.set[:ghost][:ssl_key] = databag['ghost']['ssl_key'] rescue node[:ghost][:ssl_key]
   node.set[:ghost][:ssl_cacert] = databag['ghost']['ssl_cacert'] rescue node[:ghost][:ssl_cacert]
