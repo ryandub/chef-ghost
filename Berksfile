@@ -5,6 +5,7 @@ metadata
 cookbook 'apt'
 cookbook 'ark'
 cookbook 'database'
+cookbook 'firewall'
 cookbook 'git'
 cookbook 'mysql'
 cookbook 'nginx'
