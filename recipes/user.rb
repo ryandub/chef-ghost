@@ -3,7 +3,7 @@ require 'digest/sha2'
 
 if node[:ghost][:databag]
   databag = Chef::EncryptedDataBagItem.load(node[:ghost][:databag], node[:ghost][:databag_item])
-  node.set_unless[:ghost][:password] = databag[:ghost][:password] rescue nil
+  node.set_unless[:ghost][:password] = databag['ghost']['password'] rescue nil
 else
   node.set_unless[:ghost][:password] = secure_password
 end

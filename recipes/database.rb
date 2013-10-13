@@ -2,8 +2,8 @@ include_recipe 'database::mysql'
 
 if node[:ghost][:databag]
   databag = Chef::EncryptedDataBagItem.load(node[:ghost][:databag], node[:ghost][:databag_item])
-  node.set_unless[:ghost][:db_admin_password] = databag[:ghost][:db_admin_password] rescue nil
-  node.set_unless[:ghost][:db_password] = databag[:ghost][:db_password] rescue nil
+  node.set_unless[:ghost][:db_admin_password] = databag['ghost']['db_admin_password'] rescue nil
+  node.set_unless[:ghost][:db_password] = databag['ghost']['db_password'] rescue nil
 end
 
 mysql_connection_info = {:host => node[:ghost][:db_host], :username => node[:ghost][:db_admin_user], :password => node[:ghost][:db_admin_password]}

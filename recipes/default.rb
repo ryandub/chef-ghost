@@ -40,8 +40,8 @@ end
 ### Load Secrets from Databag
 if node[:ghost][:databag]
   databag = Chef::EncryptedDataBagItem.load(node[:ghost][:databag], node[:ghost][:databag_item])
-  node.set_unless[:ghost][:mail_password] = databag[:ghost][:mail_password] rescue nil
-  node.set_unless[:ghost][:db_password] = databag[:ghost][:db_password] rescue nil
+  node.set_unless[:ghost][:mail_password] = databag['ghost']['mail_password'] rescue nil
+  node.set_unless[:ghost][:db_password] = databag[:ghost]['db_password'] rescue nil
 end
 
 ### Create Config
