@@ -1,3 +1,5 @@
+node.set_unless[:nginx][:repo_source] = "nginx"
+
 include_recipe 'nginx'
 
 begin
