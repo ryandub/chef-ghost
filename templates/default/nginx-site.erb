@@ -1,5 +1,5 @@
-proxy_cache_path  /var/cache/nginx levels=1:2 keys_zone=one:8m max_size=3000m inactive=600m;
-proxy_temp_path /var/tmp;
+proxy_cache_path  /var/cache/nginx/ levels=1:2 keys_zone=one:8m max_size=3000m inactive=600m;
+proxy_temp_path /var/tmp 1 2;
 server {
   listen       80 default_server;
 
@@ -40,8 +40,13 @@ server {
     proxy_set_header   Connection "";
     proxy_http_version 1.1;
     proxy_cache one;
-    proxy_cache_key ghost$request_uri$scheme;
-    proxy_buffering off;
+    proxy_cache_valid 200 302 8m;
+    proxy_cache_valid 404 1m;
+    server_tokens off;
+    proxy_ignore_headers "Expires" "Cache-Control";
+    proxy_ignore_headers Set-Cookie;
+    proxy_cache_key "$scheme$host$request_uri";
+    proxy_buffering on;
     proxy_pass             http://localhost:2368/;
   }
 }
@@ -97,8 +102,13 @@ server {
     proxy_set_header   Connection "";
     proxy_http_version 1.1;
     proxy_cache one;
-    proxy_cache_key ghost$request_uri$scheme;
-    proxy_buffering off;
+    proxy_cache_valid 200 302 8m;
+    proxy_cache_valid 404 1m;
+    server_tokens off;
+    proxy_ignore_headers "Expires" "Cache-Control";
+    proxy_ignore_headers Set-Cookie;
+    proxy_cache_key "$scheme$host$request_uri";
+    proxy_buffering on;
     proxy_pass             http://localhost:2368/;
   }
 
