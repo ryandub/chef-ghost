@@ -30,7 +30,9 @@ extract_dir = ::File.join(node[:ghost][:install_path], "ghost")
 bash "unzip_ghost" do
   cwd Chef::Config[:file_cache_path]
   code "unzip -q -u -o #{Chef::Config[:file_cache_path]}/ghost.zip -d #{extract_dir}"
-  not_if File.exists?("#{extract_dir}/config.js")
+  not_if do
+    File.exists?("#{extract_dir}/config.js")
+  end
 end
 
 ### Install Dependencies
