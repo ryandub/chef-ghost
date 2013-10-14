@@ -1,6 +1,6 @@
 node.set_unless[:nginx][:repo_source] = "nginx"
-
-include_recipe 'nginx'
+include_recipe "nginx::repo"
+include_recipe "nginx"
 
 begin
   databag = Chef::EncryptedDataBagItem.load(node[:ghost][:databag], node[:ghost][:databag_item])
@@ -45,7 +45,16 @@ template "/etc/nginx/sites-available/ghost" do
   notifies :restart, "service[nginx]"
 end
 
+### Workaround for default config in conf.d instead of sites-enabled.
+template "/etc/nginx/conf.d/default.conf" do
+  source "nginx-default.erb"
+  notifies :restart, "service[nginx]"
+end
+
+nginx_site "default" do
+  enable false
+end
+
 nginx_site "ghost" do
   enable true
 end
-
