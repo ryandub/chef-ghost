@@ -18,6 +18,7 @@ user node[:ghost][:user] do
   home node[:ghost][:home_dir]
   shell "/bin/bash"
   password shadow_hash
+  supports :manage_home => true
   action :create
 end
 
