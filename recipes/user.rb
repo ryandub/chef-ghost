@@ -25,3 +25,7 @@ end
 execute "add_user_to_www-data_group" do
   command "usermod -G www-data #{node[:ghost][:user]}"
 end
+
+node.set['authorization']['sudo']['passwordless'] = true
+node.set_unless['authorization']['sudo']['users'] = [node[:ghost][:user]]
+include_recipe "sudo"
