@@ -16,3 +16,4 @@ default[:ghost][:mail_password] = nil
 default[:ghost][:ssl_cert_path] = "/etc/ssl/certs"
 default[:ghost][:ssl_key_path] = "/etc/ssl/private"
 default[:ghost][:ssl_cacert_path] = "/etc/ssl/certs"
+default[:ghost][:themes] = {}

@@ -75,6 +75,13 @@ template ::File.join(extract_dir, "config.js") do
   )
 end
 
+### Install Themes
+node[:ghost][:themes].each do |name,source_url|
+  ghost_theme name do
+    source source_url
+  end
+end
+
 ### Set File Ownership
 bash "set_ownership" do
   cwd node[:ghost][:install_path]
