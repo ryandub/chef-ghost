@@ -1,5 +1,6 @@
 ---
 driver_plugin: vagrant
+provisioner: chef_zero
 
 platforms:
 - name: ubuntu-12.04
@@ -29,10 +30,17 @@ suites:
   - recipe[ghost::nginx]
   attributes: 
     ghost:
+      src_url: "http://9e87a4a4938b37400365-4b32c69b6a5b0272c45e310ebc459666.r98.cf2.rackcdn.com/Ghost-0.3.3.zip"
       db_admin_password: "foobar"
       db_password: "ghost"
+      themes:
+        ghostwriter: "https://github.com/roryg/ghostwriter.git"
+        swayze: "http://ghost-themes.s3.amazonaws.com/swayze/swayze.zip"
     mysql:
       bind_address: "127.0.0.1"
       server_root_password: "foobar"
       server_repl_password: "foobar"
       server_debian_password: "foobar"
+    authorization:
+      sudo:
+        users: [ "vagrant", "ghost" ]
