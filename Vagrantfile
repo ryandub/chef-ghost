@@ -24,7 +24,6 @@ Vagrant.configure("2") do |config|
         }
       },
       :ghost => {
-        :src_url => "http://9e87a4a4938b37400365-4b32c69b6a5b0272c45e310ebc459666.r98.cf2.rackcdn.com/Ghost-0.3.3.zip",
         :db_admin_password => "foobar",
         :db_password => "ghost"
       },
