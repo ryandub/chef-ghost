@@ -7,8 +7,6 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   config.vm.network :private_network, ip: "33.33.33.10"
-  config.ssh.max_tries = 40
-  config.ssh.timeout   = 120
   config.vm.network :forwarded_port, guest: 80, host: 3080
   config.vm.network :forwarded_port, guest: 2368, host: 2368
 
@@ -24,7 +22,6 @@ Vagrant.configure("2") do |config|
         }
       },
       :ghost => {
-        :src_url => "http://9e87a4a4938b37400365-4b32c69b6a5b0272c45e310ebc459666.r98.cf2.rackcdn.com/Ghost-0.3.3.zip",
         :db_admin_password => "foobar",
         :db_password => "ghost"
       },
