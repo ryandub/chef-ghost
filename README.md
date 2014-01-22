@@ -34,6 +34,7 @@ Attributes
 * `node[:ghost][:mail_transport]` - local SMTP or Mailgun. Default is `local`. To use Mailgun, set to `mailgun`.
 * `node[:ghost][:mail_user]` - user for SMTP auth. Default is `nil`.
 * `node[:ghost][:mail_password]` - password for SMTP auth. Default is `nil`.
+* `node[:ghost][:themes]` - hash of themes you would like installed. Default is empty.
 
 
 Recipes
@@ -50,6 +51,28 @@ Installs Nginx, creates and enables Nginx site configuration with caching and pr
 ### user
 Creates Ghost user and sets password.
 
+Resources/Providers
+-------------------
+
+### ghost\_theme
+
+#### Actions
+The default action is `:install`.
+- `:install` - Downloads and installs the theme.
+- `:remove` - Deletes the theme.
+
+Both actions, when taken, will restart the ghost service.
+
+#### Attribute Parameters
+- `name` - _(Name Attribute)_, a string, name of the theme.
+- `source` - a string, URL to .git, .zip or .tar.gz file.
+
+#### Examples
+```
+ghost_theme "ghostwriter" do
+  source "https://github.com/roryg/ghostwriter.git"
+end
+```
 
 Usage
 -----
@@ -78,6 +101,20 @@ Then, use a run_list like this:
 "recipe[ghost::nginx]"
 
 ```
+
+To install themes you can set the `node[:ghost][:themes]` to a hash of names and links to a Git repo (.git), ZIP file (.zip) or G-zipped Tarball (.tar.gz).
+The names will be the name of the theme in your WebUI.
+
+```
+{
+  "ghost": {
+    "themes": {
+      "n-coded": "https://github.com/polygonix/N-Coded.git",
+      "swayze": "http://ghost-themes.s3.amazonaws.com/swayze/swayze.zip"
+    }
+  }
+}
+
 
 ### With Vagrant
 * Setup [Vagrant](http://www.vagrantup.com/).

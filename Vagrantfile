@@ -23,7 +23,10 @@ Vagrant.configure("2") do |config|
       },
       :ghost => {
         :db_admin_password => "foobar",
-        :db_password => "ghost"
+        :db_password => "ghost",
+        :themes => {
+          :ghostwriter => "https://github.com/roryg/ghostwriter.git"
+        }
       },
       :mysql => {
         :bind_address => "127.0.0.1",
