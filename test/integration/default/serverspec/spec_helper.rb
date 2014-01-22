@@ -1,3 +1,7 @@
+ENV['GEM_HOME'] = nil
+ENV['GEM_PATH'] = nil
+ENV['GEM_CACHE'] = nil
+
 require 'serverspec'
 require 'pathname'
 
