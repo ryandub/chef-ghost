@@ -1,6 +1,6 @@
 chef-ghost
 ================
-Cookbook to deploy [Ghost CMS](http://ghost.org/) using MySQL and either Mailgun or local SMTP
+Cookbook to deploy [Ghost](http://ghost.org/) using MySQL and either Mailgun or local SMTP
 
 Requirements
 ------------
