@@ -1,4 +1,6 @@
 node.set_unless[:nginx][:repo_source] = "nginx"
+node.set_unless[:nginx][:default_site_enabled] = false
+
 include_recipe "nginx::repo"
 include_recipe "nginx"
 
@@ -51,10 +53,7 @@ template "/etc/nginx/conf.d/default.conf" do
   notifies :restart, "service[nginx]"
 end
 
-nginx_site "default" do
-  enable false
-end
-
 nginx_site "ghost" do
   enable true
+  template false
 end
